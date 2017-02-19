@@ -1,2 +1,3 @@
 $("#ingredient-list").html("<%= escape_javascript render('ingredients') %>");
+Materialize.toast('<%= @message %>', 4000)
 $("body").animate({scrollTop: $("#new-ingredient-btn").position().top},1000);

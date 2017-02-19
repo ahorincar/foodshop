@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col s12">
-    <%= form_for(@ingredient, :html => { :id => "ingredient-form" }) do |f| %>
+    <%= form_for(@ingredient, html: { id: "ingredient-form" }) do |f| %>
       <% if @ingredient.errors.any? %>
         <div id="error_explanation">
           <ul>
           <% @ingredient.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+            <li class="validation-error"><%= message %></li>
           <% end %>
           </ul>
         </div>

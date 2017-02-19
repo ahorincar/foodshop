@@ -4,13 +4,17 @@
       <div class="row">
           <div class="row">
             <div class="input-field col s12">
-              <%= text_field_tag :url, nil, placeholder: "Enter recipe URL" %>
+              <%= text_field_tag :url, nil, placeholder: "Enter recipe URL", class: "center-text" %>
             </div>
           </div>
 
-          <%= button_tag(:class => "btn waves-effect waves-light") do %>
-            Add Ingredients
-          <% end %>
+          <div class="row">
+            <div class="col s6 offset-s3 center-text">
+              <%= button_tag(class: "btn waves-effect waves-light") do %>
+                Add Ingredients
+              <% end %>
+            </div>
+          </div>
       </div>
     <% end %>
   </div>

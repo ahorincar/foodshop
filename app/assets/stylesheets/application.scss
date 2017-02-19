@@ -18,6 +18,10 @@ $secondary-color: color("yellow", "base") !default;
   text-align: right;
 }
 
+.field {
+  text-align: left;
+}
+
 .ingredient-row:hover {
     background-color: #ddd;
 }
@@ -30,9 +34,10 @@ $secondary-color: color("yellow", "base") !default;
   color: black;
 }
 
-.shopping-list-title{
+.center-text {
   text-align: center;
 }
-// .collection-item.ingredient {
-//   float: right;
-// }
+
+.validation-error {
+  color: #26a69a;
+}

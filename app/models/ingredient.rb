@@ -4,6 +4,8 @@ require 'nokogiri'
 class Ingredient < ApplicationRecord
   validates_presence_of :name, :shopping_list_id
   validates :quantity, presence: true, unless: "metric.blank?"
+  validates :quantity, numericality: true, allow_nil: true
+
   belongs_to :shopping_list
 
   INGREDIENT_CSS_CLASS = ".ingredients-list__item"

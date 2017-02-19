@@ -7,9 +7,20 @@ class IngredientsController < ApplicationController
       success = Ingredient.extract_ingredients_from_url(@url)
       if success
         @ingredients = ShoppingList.get_or_create_first.ingredients
+        @message = "The ingredients were added to your shopping list."
         respond_to do |format|
           format.js
         end
+      else
+        @message = "The URL provided could not be accessed."
+        respond_to do |format|
+          format.js { render :import_message }
+        end
+      end
+    else
+      @message = "Please enter a URL."
+      respond_to do |format|
+        format.js { render :import_message }
       end
     end
   end
@@ -75,6 +86,7 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   # DELETE /ingredients/1.json
   def destroy
+    @ingredients = ShoppingList.get_or_create_first.ingredients
     @ingredient.destroy
     respond_to do |format|
       format.html { redirect_to shopping_list_path, notice: 'Ingredient was successfully destroyed.' }
