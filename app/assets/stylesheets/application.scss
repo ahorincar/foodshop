@@ -26,8 +26,12 @@ $secondary-color: color("yellow", "base") !default;
   width: 500px;
 }
 
-.edit-ingredient {
+.edit-ingredient-btn {
   color: black;
+}
+
+.shopping-list-title{
+  text-align: center;
 }
 // .collection-item.ingredient {
 //   float: right;

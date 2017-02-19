@@ -16,4 +16,9 @@ enable_form_loader_listener = function() {
   $('.edit-ingredient-btn').click(function() {
     $.get({url: $(this).attr("data-edit-url"), dataType: "script"});
   });
+
+  $('.delete-ingredient').change(function() {
+    $.ajax({type: "delete", url: $(this).attr("data-edit-url"), dataType: "script"});
+  });
+
 }

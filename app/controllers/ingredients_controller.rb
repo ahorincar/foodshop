@@ -79,6 +79,7 @@ class IngredientsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shopping_list_path, notice: 'Ingredient was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

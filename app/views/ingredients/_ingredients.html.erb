@@ -1,9 +1,9 @@
 <div class="collection">
   <% @ingredients.each do |ingredient| %>
-    <div class="collection-item row ingredient-row">
+    <div class="collection-item row ingredient-row" id="ingredient-<%= ingredient.id %>">
       <div class="col s1">
-        <input type="checkbox" id="test6"/>
-        <label for="test6">&nbsp;</label>
+        <input type="checkbox" class="delete-ingredient" id="checkbox_<%= ingredient.id %>" data-edit-url="<%= ingredient_path(ingredient) %>"/>
+        <label for="checkbox_<%= ingredient.id %>">&nbsp;</label>
       </div>
       <div class="col s10">
         <% unless ingredient.quantity.blank? %>
