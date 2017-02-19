@@ -52,12 +52,9 @@ class IngredientsController < ApplicationController
 
     respond_to do |format|
       if @ingredient.save
-        format.html { redirect_to shopping_list_path, notice: 'Ingredient was successfully created.' }
-        format.json { render :show, status: :created, location: @ingredient }
+        @message = "A new ingredient was added to your shopping list."
         format.js
       else
-        format.html { render :new }
-        format.json { render json: @ingredient.errors, status: :unprocessable_entity }
         format.js { render :new }
       end
     end
@@ -69,15 +66,12 @@ class IngredientsController < ApplicationController
     shopping_list = ShoppingList.find(@ingredient.shopping_list_id)
     respond_to do |format|
       if @ingredient.update(ingredient_params)
-        format.html { redirect_to shopping_list, notice: 'Ingredient was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ingredient }
+        @message = "The ingredient has been updated."
         format.js   do
           @ingredients = shopping_list.ingredients
           render :create
         end
       else
-        format.html { render :edit }
-        format.json { render json: @ingredient.errors, status: :unprocessable_entity }
         format.js { render :edit }
       end
     end
@@ -88,9 +82,8 @@ class IngredientsController < ApplicationController
   def destroy
     @ingredients = ShoppingList.get_or_create_first.ingredients
     @ingredient.destroy
+    @message = "The ingredient has been deleted."
     respond_to do |format|
-      format.html { redirect_to shopping_list_path, notice: 'Ingredient was successfully destroyed.' }
-      format.json { head :no_content }
       format.js
     end
   end

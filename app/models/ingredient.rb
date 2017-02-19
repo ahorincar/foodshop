@@ -20,7 +20,6 @@ class Ingredient < ApplicationRecord
 
       ingredient_elements.each do |element|
         quantity, metric, name = self.preprocess_ingredient_text(element.text)
-        p element.text
         self.create_or_update_ingredient(quantity, metric, name, shopping_list)
       end
     end

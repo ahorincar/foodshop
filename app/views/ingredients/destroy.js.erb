@@ -1,4 +1,5 @@
 setTimeout(function() {
+  Materialize.toast('<%= @message %>', 4000)
   $("#ingredient-list").html("<%= escape_javascript render('ingredients') %>");
   enable_form_loader_listener();
 }, 500);

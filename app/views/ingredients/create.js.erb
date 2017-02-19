@@ -1,3 +1,5 @@
+Materialize.toast('<%= @message %>', 4000)
+
 $('#ingredientModal').modal('close');
 
 $("#ingredient-list").html("<%= escape_javascript render('ingredients/ingredients') %>")
