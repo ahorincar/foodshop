@@ -1,4 +1,42 @@
-<p id="notice"><%= notice %></p>
+<%= render 'import_ingredients' %>
 
-<h1><%= @shopping_list.title %></h1>
-<br>
+<div class="row">
+  <div class="col s6 offset-s3">
+    <h1><%= @shopping_list.title %></h1>
+
+    <div class="collection">
+      <% @shopping_list.ingredients.each do |ingredient| %>
+        <div class="collection-item row">
+          <div class="col s1">
+            <input type="checkbox" id="test6"/>
+            <label for="test6">&nbsp;</label>
+          </div>
+          <div class="col s10">
+            <% unless ingredient.quantity.blank? %>
+              <span class="new badge quantity" data-badge-caption="">
+                <%= ingredient.quantity %> <%= ingredient.metric %>
+              </span>
+            <% end %>
+            <%= ingredient.name %></a>
+          </div>
+          <div class="col s1 ingredient-btns">
+            <%= link_to edit_ingredient_path(ingredient) do %>
+              <i class="material-icons">mode_edit</i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Ingredient Modal Trigger -->
+    <a class="modal-trigger waves-effect waves-light btn new-ingredient" href="#ingredientModal">New Ingredient</a>
+
+      <!-- Ingredient Modal Structure -->
+    <div id="ingredientModal" class="modal modal-fixed-footer">
+      <div class="modal-content ingredient-form">
+      </div>
+    </div>
+
+  </div>
+  <br>
+</div>

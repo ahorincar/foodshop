@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col s6 offset-s3">
+    <%= form_tag import_ingredients_path do %>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <%= text_field_tag :url, nil, placeholder: "Enter recipe URL" %>
+            </div>
+          </div>
+
+          <%= button_tag(:class => "btn waves-effect waves-light") do %>
+            Add Ingredients
+          <% end %>
+        </form>
+      </div>
+    <% end %>
+  </div>
+</div>

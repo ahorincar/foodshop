@@ -1,5 +1,22 @@
+/*
+*= require material_icons
+*/
+
 @import "materialize";
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
 $secondary-color: color("yellow", "base") !default;
 @import 'materialize';
+
+.badge.quantity {
+  float: left;
+  margin-left: 0;
+  margin-right: 14px;
+}
+
+.ingredient-btns {
+  text-align: right;
+}
+// .collection-item.ingredient {
+//   float: right;
+// }
