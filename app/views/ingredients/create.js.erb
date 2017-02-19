@@ -1,0 +1,5 @@
+$('#ingredientModal').modal('close');
+
+$("#ingredient-list").html("<%= escape_javascript render('ingredients/ingredients') %>")
+
+enable_form_loader_listener();

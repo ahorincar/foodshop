@@ -17,6 +17,18 @@ $secondary-color: color("yellow", "base") !default;
 .ingredient-btns {
   text-align: right;
 }
+
+.ingredient-row:hover {
+    background-color: #ddd;
+}
+
+#ingredientModal {
+  width: 500px;
+}
+
+.edit-ingredient {
+  color: black;
+}
 // .collection-item.ingredient {
 //   float: right;
 // }

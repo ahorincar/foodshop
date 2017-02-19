@@ -1,0 +1,24 @@
+<div class="collection">
+  <% @ingredients.each do |ingredient| %>
+    <div class="collection-item row ingredient-row">
+      <div class="col s1">
+        <input type="checkbox" id="test6"/>
+        <label for="test6">&nbsp;</label>
+      </div>
+      <div class="col s10">
+        <% unless ingredient.quantity.blank? %>
+          <span class="new badge quantity" data-badge-caption="">
+            <%= ingredient.quantity %> <%= ingredient.metric %>
+          </span>
+        <% end %>
+        <%= ingredient.name %></a>
+      </div>
+      <div class="col s1 ingredient-btns">
+        <!-- Ingredient Modal Trigger -->
+        <a class="modal-trigger edit-ingredient-btn" data-edit-url="<%= edit_ingredient_path(ingredient) %>" id="edit-ingredient-btn_<%= ingredient.id %>" href="#ingredientModal">
+          <span><i class="material-icons">mode_edit</i></span>
+        </a>
+      </div>
+    </div>
+  <% end %>
+</div>

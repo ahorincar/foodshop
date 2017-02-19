@@ -9,26 +9,19 @@ class Ingredient < ApplicationRecord
   INGREDIENT_CSS_CLASS = ".ingredients-list__item"
 
   def self.extract_ingredients_from_url(url)
-    response = get_request_response("http://www.bbcgoodfood.com/recipes/salted-caramel-biscuit-bars")
+    response = get_request_response(url)
 
     if response
-      # ingredients_list = extract_ingredients_list_from_body(page_body)
       document = Nokogiri::HTML(response.body)
       ingredient_elements = document.css(INGREDIENT_CSS_CLASS)
+      shopping_list = ShoppingList.get_or_create_first
 
       ingredient_elements.each do |element|
-        ingredient_hash = self.preprocess_ingredient_text(element.text)
-        # Ingredient.create(ingredient_hash)
+        quantity, metric, name = self.preprocess_ingredient_text(element.text)
+        p element.text
+        self.create_or_update_ingredient(quantity, metric, name, shopping_list)
       end
-    else
-      return nil
     end
-    #
-    # for ingredient in ingredients_list
-    #   ingredient_params = preprocess_ingredient(ingredient)
-    #   #set shopping list id
-    #   Ingredient.create(ingredient_params)
-    # end
   end
 
   private
@@ -50,8 +43,30 @@ class Ingredient < ApplicationRecord
     end
 
     def self.preprocess_ingredient_text(text)
-      p text
-      # extracts quantity and metric and name
-      # creates a hash with quantity, metric and name
+      tbsp_regex = /(.*)\s+(tbsp|tsp)\s+([\w\s\-]*)/i
+      weight_regex = /(\d+)(g|kg|l|ml)\s+([\w\s\-]*)/i
+      number_regex = /(\d+)\s+([\w\s\-]*)/i
+
+      if match = text.match(tbsp_regex)
+        quantity, metric, name = match.captures
+      elsif match = text.match(weight_regex)
+        quantity, metric, name = match.captures
+      elsif match = text.match(number_regex)
+        quantity, name = match.captures
+      else
+        name = text
+      end
+
+      return quantity, metric, name
+    end
+
+    def self.create_or_update_ingredient(quantity, metric, name, shopping_list)
+      results = Ingredient.where(name: name)
+
+      if results.empty?
+        Ingredient.create(name: name, quantity: quantity, metric: metric, shopping_list: shopping_list)
+      else
+        results.first.update(name: name, quantity: quantity, metric: metric)
+      end
     end
 end

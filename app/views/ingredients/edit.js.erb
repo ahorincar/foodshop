@@ -1,7 +1,2 @@
-$(".ingredient-form").html("<h4>Edit Ingredient</h4>" +
+$(".ingredient-form-wrapper").html("<h4>Edit Ingredient</h4>" +
   "<%= escape_javascript render('form') %>");
-
-$('#new_ingredient').submit(function (){
- $.post($(this).attr('action'), $(this).serialize(), null, "script");
- return false;
-});

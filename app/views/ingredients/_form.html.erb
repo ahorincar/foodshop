@@ -1,36 +1,30 @@
-<%= form_for(@ingredient) do |f| %>
-  <% if @ingredient.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @ingredient.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="row">
+  <div class="col s12">
+    <%= form_for(@ingredient, :html => { :id => "ingredient-form" }) do |f| %>
+      <% if @ingredient.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @ingredient.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
 
-  <div class="field">
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
-  </div>
+      <div class="field">
+        <%= f.label :quantity %>
+        <%= f.text_field :quantity %>
+      </div>
 
-  <div class="field">
-    <%= f.label :metric %>
-    <%= f.text_field :metric %>
+      <div class="field">
+        <%= f.label :metric %>
+        <%= f.text_field :metric %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :shopping_list_id %>
-    <%= f.number_field :shopping_list_id %>
-  </div>
-
-  <div class="modal-footer">
-    <a href="#" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    <%= f.submit 'Save', :class => 'modal-action modal-close waves-effect waves-green btn-flat' %>
-  </div>
-<% end %>
+</div>

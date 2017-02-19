@@ -5,12 +5,11 @@ class IngredientsController < ApplicationController
     @url = params[:url]
     unless @url.blank?
       success = Ingredient.extract_ingredients_from_url(@url)
-
       if success
-        flash[:success] = "Your shopping list was updated."
-        # update shopping list
-      else
-        flash[:error] = "The URL provided could not be accessed."
+        @ingredients = ShoppingList.get_or_create_first.ingredients
+        respond_to do |format|
+          format.js
+        end
       end
     end
   end
@@ -25,6 +24,10 @@ class IngredientsController < ApplicationController
 
   # GET /ingredients/1/edit
   def edit
+    @ingredient = Ingredient.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /ingredients
@@ -34,11 +37,13 @@ class IngredientsController < ApplicationController
     shopping_list = ShoppingList.get_or_create_first
     @ingredient = Ingredient.new(ingredient_params)
     @ingredient.shopping_list_id = shopping_list.id
+    @ingredients = shopping_list.ingredients
 
     respond_to do |format|
       if @ingredient.save
         format.html { redirect_to shopping_list_path, notice: 'Ingredient was successfully created.' }
         format.json { render :show, status: :created, location: @ingredient }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }
@@ -55,9 +60,14 @@ class IngredientsController < ApplicationController
       if @ingredient.update(ingredient_params)
         format.html { redirect_to shopping_list, notice: 'Ingredient was successfully updated.' }
         format.json { render :show, status: :ok, location: @ingredient }
+        format.js   do
+          @ingredients = shopping_list.ingredients
+          render :create
+        end
       else
         format.html { render :edit }
         format.json { render json: @ingredient.errors, status: :unprocessable_entity }
+        format.js { render :edit }
       end
     end
   end
