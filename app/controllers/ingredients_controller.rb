@@ -6,7 +6,7 @@ class IngredientsController < ApplicationController
     unless @url.blank?
       success = Ingredient.extract_ingredients_from_url(@url)
       if success
-        @ingredients = ShoppingList.get_or_create_first.ingredients
+        @ingredients = ShoppingList.get_or_create_first.ingredients.sorted
         @message = "The ingredients were added to your shopping list."
         respond_to do |format|
           format.js
@@ -48,7 +48,7 @@ class IngredientsController < ApplicationController
     shopping_list = ShoppingList.get_or_create_first
     @ingredient = Ingredient.new(ingredient_params)
     @ingredient.shopping_list_id = shopping_list.id
-    @ingredients = shopping_list.ingredients
+    @ingredients = shopping_list.ingredients.sorted
 
     respond_to do |format|
       if @ingredient.save
@@ -68,7 +68,7 @@ class IngredientsController < ApplicationController
       if @ingredient.update(ingredient_params)
         @message = "The ingredient has been updated."
         format.js   do
-          @ingredients = shopping_list.ingredients
+          @ingredients = shopping_list.ingredients.sorted
           render :create
         end
       else
@@ -80,7 +80,7 @@ class IngredientsController < ApplicationController
   # DELETE /ingredients/1
   # DELETE /ingredients/1.json
   def destroy
-    @ingredients = ShoppingList.get_or_create_first.ingredients
+    @ingredients = ShoppingList.get_or_create_first.ingredients.sorted
     @ingredient.destroy
     @message = "The ingredient has been deleted."
     respond_to do |format|

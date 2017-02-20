@@ -13,14 +13,29 @@ RSpec.describe Ingredient, type: :model do
     expect(ingredient.save).to be false
   end
 
-  # it "should not save an ingredient without a quantity if metric is present" do
-  # end
-  #
-  # it "should not save an ingredient with a quantity that is not a number" do
-  # end
-  #
-  # it "should extract HTML text when ingredient CSS class is present" do
-  # end
+  it "should not save an ingredient without a quantity if metric is present" do
+    ingredient = Ingredient.new(name: "milk", quantity: "", metric: "l")
+
+    expect(ingredient.save).to be false
+  end
+
+  it "should not save an ingredient with a quantity that is not a number" do
+    ingredient = Ingredient.new(name: "milk", quantity: "not_number")
+
+    expect(ingredient.save).to be false
+  end
+
+  it "should extract HTML text when ingredient CSS class is present" do
+    html = IO.read(Rails.root.join("spec", "fixtures", "recipe1.html"))
+
+    expect(Ingredient.extract_ingredients_from_html(html).map { |e| e.text }).to eq([
+      "250g pack slightly salted butter, softened",
+      "750g icing sugar",
+      "3 tbsp powdered malt drink",
+      "1 tsp vanilla extract",
+      "280g tub full-fat cream cheese",
+    ])
+  end
   #
   # it "should extract ingredient name from HTML text" do
   # end

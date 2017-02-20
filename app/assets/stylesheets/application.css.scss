@@ -8,6 +8,24 @@ $primary-color: color("blue", "lighten-2") !default;
 $secondary-color: color("yellow", "base") !default;
 @import 'materialize';
 
+
+// .body {
+//   background-image: image-url('/assets/images/sunset.jpg');
+// }
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(image-path('sunrise.jpg'));
+  opacity: 0.5;
+}
+
+.title {
+  position: relative;
+}
+
 .badge.quantity {
   float: left;
   margin-left: 0;
