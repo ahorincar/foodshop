@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'shopping_lists#index'
+
   resources :ingredients do
     collection do
       post 'import'
