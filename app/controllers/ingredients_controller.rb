@@ -4,8 +4,9 @@ class IngredientsController < ApplicationController
   def import
     @url = params[:url]
     unless @url.blank?
-      success = Ingredient.extract_ingredients_from_url(@url)
-      if success
+      # If the ingredients could be extracted, then populate them in the list of
+      # ingredients. Otherwise display an error message.
+      if Ingredient.extract_ingredients_from_url(@url)
         @ingredients = ShoppingList.get_or_create_first.ingredients.sorted
         @message = "The ingredients were added to your shopping list."
         respond_to do |format|
@@ -33,7 +34,6 @@ class IngredientsController < ApplicationController
     end
   end
 
-  # GET /ingredients/1/edit
   def edit
     @ingredient = Ingredient.find(params[:id])
     respond_to do |format|
@@ -41,8 +41,6 @@ class IngredientsController < ApplicationController
     end
   end
 
-  # POST /ingredients
-  # POST /ingredients.json
   def create
     # Ensure the ingredient has a shopping_list_id set.
     shopping_list = ShoppingList.get_or_create_first
@@ -60,8 +58,6 @@ class IngredientsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ingredients/1
-  # PATCH/PUT /ingredients/1.json
   def update
     shopping_list = ShoppingList.find(@ingredient.shopping_list_id)
     respond_to do |format|
@@ -77,8 +73,6 @@ class IngredientsController < ApplicationController
     end
   end
 
-  # DELETE /ingredients/1
-  # DELETE /ingredients/1.json
   def destroy
     @ingredients = ShoppingList.get_or_create_first.ingredients.sorted
     @ingredient.destroy

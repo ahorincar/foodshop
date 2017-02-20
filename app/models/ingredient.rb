@@ -1,8 +1,5 @@
-require 'net/http'
-require 'nokogiri'
-
 class Ingredient < ApplicationRecord
-  validates_presence_of :name, :shopping_list_id
+  validates :name, :shopping_list_id, presence: true
   validates :quantity, presence: true, unless: "metric.blank?"
   validates :quantity, numericality: true, allow_nil: true
 
@@ -21,10 +18,11 @@ class Ingredient < ApplicationRecord
 
       ingredient_elements.each do |element|
         quantity, metric, name = self.preprocess_ingredient_text(element.text)
-        # self.create_or_update_ingredient(quantity, metric, name, shopping_list)
         Ingredient.create(name: name, quantity: quantity, metric: metric, shopping_list: shopping_list)
       end
+      return true
     end
+    false
   end
 
   def self.extract_ingredients_from_html(html)
@@ -56,9 +54,9 @@ private
 
       if url.host and url.port
         req = Net::HTTP::Get.new(url.to_s)
-        response = Net::HTTP.start(url.host, url.port) {|http|
+        response = Net::HTTP.start(url.host, url.port) do |http|
           http.request(req)
-        }
+        end
 
         if response.kind_of? Net::HTTPSuccess
           return response

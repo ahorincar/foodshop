@@ -15,10 +15,3 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require_tree .
-
-$(document).ready(function(){
-   $('.modal').modal();
-   $('#ingredient-submit-btn').on('click', function() {
-     $.post($('#ingredient-form').attr('action'), $('#ingredient-form').serialize(), null, "script");
-   });
- });

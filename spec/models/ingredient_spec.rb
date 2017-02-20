@@ -36,19 +36,27 @@ RSpec.describe Ingredient, type: :model do
       "280g tub full-fat cream cheese",
     ])
   end
-  #
-  # it "should extract ingredient name from HTML text" do
-  # end
-  #
-  # it "should extract tbsp and tsp from HTML text" do
-  # end
-  #
-  # it "should extract g, kg, l and ml from HTML text" do
-  # end
-  #
-  # it "should extract quantity from HTML text that does not have a metric" do
-  # end
-  #
-  # it "should create ingredients based on extracted text" do
-  # end
+
+  it "should extract ingredient name, quantity and metric from HTML text" do
+    ingredient_text = "750g icing sugar"
+
+    expect(Ingredient.preprocess_ingredient_text(ingredient_text)[0]).to eq("750")
+    expect(Ingredient.preprocess_ingredient_text(ingredient_text)[1]).to eq("g")
+    expect(Ingredient.preprocess_ingredient_text(ingredient_text)[2]).to eq("sugar")
+  end
+
+  it "should ignore text following the name of the ingredient (if sepparated by comma)" do
+  end
+
+  it "should extract tbsp and tsp from HTML text" do
+  end
+
+  it "should extract g, kg, l and ml from HTML text" do
+  end
+
+  it "should extract quantity from HTML text that does not have a metric" do
+  end
+
+  it "should create ingredients based on extracted text" do
+  end
 end
