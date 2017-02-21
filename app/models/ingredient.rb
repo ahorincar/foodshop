@@ -54,7 +54,7 @@ private
 
       if url.host and url.port
         req = Net::HTTP::Get.new(url.to_s)
-        response = Net::HTTP.start(url.host, url.port) do |http|
+        response = Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https') do |http|
           http.request(req)
         end
 
