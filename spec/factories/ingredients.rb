@@ -3,6 +3,6 @@ FactoryGirl.define do
     name "milk"
     quantity  1
     metric "l"
-    shopping_list ShoppingList.get_or_create_first
+    shopping_list { ShoppingList.get_or_create_first }
   end
 end
