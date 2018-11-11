@@ -46,7 +46,6 @@ RSpec.describe "Ingredients", type: :feature, js: true do
       visit '/shopping_list'
 
       find("label[for='checkbox_#{chocolate.id}']").click
-      # save_screenshot("/Users/antonia/Desktop/file.png", full: true)
 
       expect(page).to have_content 'The ingredient has been deleted.'
       expect(page).to have_no_css("#ingredient-#{chocolate.id}")

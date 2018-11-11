@@ -8,10 +8,6 @@ $primary-color: color("blue", "lighten-2") !default;
 $secondary-color: color("yellow", "base") !default;
 @import 'materialize';
 
-
-// .body {
-//   background-image: image-url('/assets/images/sunset.jpg');
-// }
 .background {
   position: fixed;
   top: 0;

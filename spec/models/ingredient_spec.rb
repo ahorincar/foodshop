@@ -45,6 +45,7 @@ RSpec.describe Ingredient, type: :model do
     expect(Ingredient.preprocess_ingredient_text(ingredient_text)[2]).to eq("sugar")
   end
 
+  # TODO: Work in progress.
   it "should ignore text following the name of the ingredient (if sepparated by comma)" do
   end
 

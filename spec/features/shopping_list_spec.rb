@@ -3,8 +3,7 @@ require 'spec_helper'
 RSpec.describe "Shopping List", type: :feature, js: true do
   describe "importing ingredients" do
     it "imports ingredients from external URL" do
-      # check if toaster is present
-      # check if shopping list was updated with the generated ingredients
+      # TODO: Work in progress.
     end
 
     it "shows toaster if URL is blank" do
